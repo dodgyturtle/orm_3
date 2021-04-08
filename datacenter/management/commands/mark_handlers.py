@@ -88,16 +88,15 @@ def main():
         student_name = env("STUDENT_NAME")
         subject_title = env("SUBJECT_TITLE")
     except environs.EnvError:
-        print("В конфигурационном файле '.env' не указана ФИО ученика и/или предмет.")
-        sys.exit(1)
+        sys.exit(
+            "В конфигурационном файле '.env' не указана ФИО ученика и/или предмет."
+        )
     try:
         student = load_student(student_name)
-    except MultipleObjectsReturned:
-        print(f"Найдено больше одного совпадения с именем ФИО: {student_name}.")
-        sys.exit(1)
-    except ObjectDoesNotExist:
-        print(f"Ученика {student_name} не найдено.")
-        sys.exit(1)
+    except Schoolkid.MultipleObjectsReturned:
+        sys.exit(f"Найдено больше одного совпадения с именем ФИО: {student_name}.")
+    except Schoolkid.DoesNotExist:
+        sys.exit(f"Ученик {student_name} не найден.")
     fix_marks(student)
     remove_chastisements(student)
     create_commendation(student, commendation_texts, subject_title)
