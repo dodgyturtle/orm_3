@@ -18,3 +18,6 @@ $ pip install -r requirements.txt
 ```
 $ python manage.py mark_handlers
 ``` 
+### Цель проекта
+
+Код написан в образовательных целях на онлайн-курсе для веб-разработчиков [dvmn.org](https://dvmn.org/).
